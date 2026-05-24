@@ -58,6 +58,26 @@ export function getDownloadUrl(path: string): string {
   return `${apiBaseUrl}${path}`;
 }
 
+export async function downloadExport(exportId: string, format: "json" | "csv" | "markdown"): Promise<void> {
+  const response = await fetch(`${apiBaseUrl}/api/exports/${exportId}/download?format=${format}`);
+  if (!response.ok) {
+    const body = await response.json().catch(() => null);
+    throw new Error(body?.message ?? `Failed to download ${format} export.`);
+  }
+
+  const blob = await response.blob();
+  const contentDisposition = response.headers.get("content-disposition");
+  const fileName = getFileName(contentDisposition) ?? `strava-export.${format === "markdown" ? "md" : format}`;
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = fileName;
+  document.body.append(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
+}
+
 export async function getConnectionStatus(): Promise<ConnectionStatus> {
   return read(await fetch(`${apiBaseUrl}/api/strava/status`));
 }
@@ -87,4 +107,18 @@ export async function createExport(request: CreateExportRequest): Promise<Create
 
 export async function getExports(): Promise<ExportJobSummary[]> {
   return read(await fetch(`${apiBaseUrl}/api/exports`));
+}
+
+function getFileName(contentDisposition: string | null): string | null {
+  if (!contentDisposition) {
+    return null;
+  }
+
+  const encodedMatch = /filename\*=UTF-8''([^;]+)/i.exec(contentDisposition);
+  if (encodedMatch) {
+    return decodeURIComponent(encodedMatch[1]);
+  }
+
+  const match = /filename="?([^";]+)"?/i.exec(contentDisposition);
+  return match?.[1] ?? null;
 }
