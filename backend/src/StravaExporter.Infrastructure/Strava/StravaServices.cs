@@ -105,8 +105,8 @@ public sealed class StravaService(IStravaApiClient client, IStravaAccessTokenPro
     public async Task<IReadOnlyCollection<StravaActivity>> GetActivitiesAsync(GetActivitiesQuery query, CancellationToken cancellationToken)
     {
         var token = await tokenProvider.GetAccessTokenAsync(cancellationToken);
-        var after = query.After is null ? null : ToUnix(query.After.Value.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc));
-        var before = query.Before is null ? null : ToUnix(query.Before.Value.ToDateTime(TimeOnly.MaxValue, DateTimeKind.Utc));
+        long? after = query.After is null ? null : ToUnix(query.After.Value.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc));
+        long? before = query.Before is null ? null : ToUnix(query.Before.Value.ToDateTime(TimeOnly.MaxValue, DateTimeKind.Utc));
         var page = 1;
         var activities = new List<StravaActivity>();
 

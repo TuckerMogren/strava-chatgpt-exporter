@@ -1,6 +1,7 @@
 using StravaExporter.Application.Exports;
 using StravaExporter.Domain.Activities;
 using StravaExporter.Domain.Exports;
+using Xunit;
 
 namespace StravaExporter.Application.Tests;
 

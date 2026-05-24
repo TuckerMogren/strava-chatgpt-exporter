@@ -1,5 +1,6 @@
 using StravaExporter.Infrastructure.Strava.Client;
 using StravaExporter.Infrastructure.Strava.Mapping;
+using Xunit;
 
 namespace StravaExporter.Infrastructure.Tests;
 

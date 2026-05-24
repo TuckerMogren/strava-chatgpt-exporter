@@ -1,5 +1,6 @@
 using FluentValidation;
 using StravaExporter.Application.Exports;
+using Xunit;
 
 namespace StravaExporter.Application.Tests;
 
