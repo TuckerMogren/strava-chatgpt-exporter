@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="backend/src/StravaExporter.Api/StravaExporter.Api.csproj" />
+  <Project Path="backend/src/StravaExporter.Application/StravaExporter.Application.csproj" />
+  <Project Path="backend/src/StravaExporter.Domain/StravaExporter.Domain.csproj" />
+  <Project Path="backend/src/StravaExporter.Infrastructure/StravaExporter.Infrastructure.csproj" />
+  <Project Path="backend/tests/StravaExporter.Application.Tests/StravaExporter.Application.Tests.csproj" />
+  <Project Path="backend/tests/StravaExporter.Infrastructure.Tests/StravaExporter.Infrastructure.Tests.csproj" />
+</Solution>

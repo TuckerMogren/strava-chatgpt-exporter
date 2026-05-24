@@ -1,0 +1,16 @@
+bin/
+obj/
+node_modules/
+dist/
+*.tsbuildinfo
+.env
+.env.local
+*.db
+*.db-shm
+*.db-wal
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json

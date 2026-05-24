@@ -1,0 +1,177 @@
+:root {
+  color: #17202a;
+  background: #f6f8fa;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: #ffffff;
+  border-right: 1px solid #d8dee4;
+  padding: 24px 16px;
+}
+
+.brand {
+  display: block;
+  font-weight: 800;
+  margin-bottom: 28px;
+  text-decoration: none;
+}
+
+nav {
+  display: grid;
+  gap: 8px;
+}
+
+nav a {
+  align-items: center;
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  text-decoration: none;
+}
+
+nav a.active,
+nav a:hover {
+  background: #fff1ec;
+  color: #c2410c;
+}
+
+main {
+  padding: 40px;
+}
+
+.page {
+  max-width: 1100px;
+}
+
+header {
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: 32px;
+  margin: 0 0 8px;
+}
+
+p {
+  color: #57606a;
+}
+
+.toolbar,
+.filters,
+.downloads {
+  align-items: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: grid;
+  font-size: 13px;
+  gap: 6px;
+}
+
+input,
+button,
+.primary,
+.downloads a {
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  font: inherit;
+  padding: 9px 12px;
+}
+
+button,
+.primary,
+.downloads a {
+  background: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.primary,
+button:hover,
+.downloads a:hover {
+  background: #fc4c02;
+  border-color: #fc4c02;
+  color: #ffffff;
+}
+
+.pill {
+  background: #eaeef2;
+  border-radius: 999px;
+  padding: 8px 12px;
+}
+
+.pill.ok {
+  background: #dafbe1;
+  color: #116329;
+}
+
+table {
+  background: #ffffff;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+}
+
+th,
+td {
+  border-bottom: 1px solid #d8dee4;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+th {
+  background: #f0f3f6;
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #d8dee4;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.error {
+  color: #b42318;
+}
+
+@media (max-width: 760px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    border-bottom: 1px solid #d8dee4;
+    border-right: 0;
+  }
+
+  main {
+    padding: 24px 16px;
+  }
+}
