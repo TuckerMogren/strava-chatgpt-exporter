@@ -66,7 +66,7 @@ public static class EndpointMappings
     public static IEndpointRouteBuilder MapActivityEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("/api/activities").WithTags("Activities");
-        group.MapGet("/", async (DateOnly? after, DateOnly? before, string? type, IStravaService strava, CancellationToken cancellationToken) =>
+        group.MapGet("", async (DateOnly? after, DateOnly? before, string? type, IStravaService strava, CancellationToken cancellationToken) =>
         {
             var activities = await strava.GetActivitiesAsync(new GetActivitiesQuery
             {

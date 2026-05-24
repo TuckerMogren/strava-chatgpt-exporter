@@ -161,6 +161,22 @@ th {
   color: #b42318;
 }
 
+.notice {
+  align-items: center;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 14px;
+}
+
+.notice span {
+  color: #57606a;
+}
+
 @media (max-width: 760px) {
   .shell {
     grid-template-columns: 1fr;
