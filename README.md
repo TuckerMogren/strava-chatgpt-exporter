@@ -50,14 +50,22 @@ ConnectionStrings__AppDb=Data Source=strava-exporter.db
 
 ## Run Locally
 
-Backend:
+Start both the backend and frontend with one script:
+
+```bash
+./start.sh
+```
+
+The script loads `.env`, maps `STRAVA_CLIENT_ID` and `STRAVA_CLIENT_SECRET` into ASP.NET Core configuration, starts the API on `http://localhost:5080`, and starts the frontend on `http://localhost:5173`.
+
+Manual backend:
 
 ```bash
 dotnet restore StravaExporter.slnx
 dotnet run --project backend/src/StravaExporter.Api/StravaExporter.Api.csproj
 ```
 
-Frontend:
+Manual frontend:
 
 ```bash
 cd frontend
