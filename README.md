@@ -93,4 +93,6 @@ If .NET 11 preview container tags are not available yet, run the backend directl
 6. Download JSON, CSV, or Markdown from `/exports`.
 7. Upload the JSON or Markdown file to ChatGPT and ask for analysis.
 
+When using `./start.sh`, every generated export is also written to the local `exports/` folder in the repo root. That folder is ignored by Git.
+
 This app is for exporting and analyzing your own personal Strava data only. It does not write to Strava, scrape other users, bypass privacy controls, or train AI models on Strava API data.

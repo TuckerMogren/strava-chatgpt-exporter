@@ -22,6 +22,11 @@ public interface IExportJobStore
     Task<ExportDownload?> GetFileAsync(Guid exportId, ExportFormat format, CancellationToken cancellationToken);
 }
 
+public interface IExportFileSink
+{
+    Task SaveAsync(IReadOnlyCollection<ExportFile> files, CancellationToken cancellationToken);
+}
+
 public interface IExportWriter
 {
     ExportFormat Format { get; }
@@ -95,6 +100,7 @@ public sealed class ExportSummaryCalculator
 public sealed class StravaExportService(
     IStravaService stravaService,
     IExportJobStore store,
+    IEnumerable<IExportFileSink> fileSinks,
     IEnumerable<IExportWriter> writers,
     ExportSummaryCalculator calculator) : IStravaExportService
 {
@@ -131,6 +137,11 @@ public sealed class StravaExportService(
             createdAtUtc)).ToArray();
 
         await store.SaveAsync(new ExportJob(exportId, athlete.Id, request, createdAtUtc), files, cancellationToken);
+        foreach (var fileSink in fileSinks)
+        {
+            await fileSink.SaveAsync(files, cancellationToken);
+        }
+
         var downloads = files.ToDictionary(
             x => x.Format.ToString().ToLowerInvariant(),
             x => $"/api/exports/{exportId}/download?format={x.Format.ToString().ToLowerInvariant()}");

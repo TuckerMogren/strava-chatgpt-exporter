@@ -2,6 +2,7 @@ bin/
 obj/
 node_modules/
 dist/
+/exports/
 *.tsbuildinfo
 .env
 .env.local

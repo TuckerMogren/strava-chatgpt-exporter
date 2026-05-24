@@ -23,6 +23,7 @@ public static class DependencyInjection
         services.AddSingleton<IExportWriter, JsonExportWriter>();
         services.AddSingleton<IExportWriter, CsvExportWriter>();
         services.AddSingleton<IExportWriter, MarkdownExportWriter>();
+        services.AddSingleton<IExportFileSink, FileSystemExportFileSink>();
         services.AddScoped<IStravaOAuthService, StravaOAuthService>();
         services.AddScoped<IStravaAccessTokenProvider, StravaAccessTokenProvider>();
         services.AddScoped<IStravaService, StravaService>();

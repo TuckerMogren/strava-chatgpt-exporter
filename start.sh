@@ -25,6 +25,7 @@ export Strava__RedirectUri="${Strava__RedirectUri:-http://localhost:5080/api/str
 export Frontend__Origin="${Frontend__Origin:-http://localhost:5173}"
 export Frontend__RedirectAfterConnect="${Frontend__RedirectAfterConnect:-http://localhost:5173/connected}"
 export ConnectionStrings__AppDb="${ConnectionStrings__AppDb:-Data Source=$ROOT_DIR/strava-exporter.db}"
+export Exports__OutputDirectory="${Exports__OutputDirectory:-$ROOT_DIR/exports}"
 export VITE_API_BASE_URL="${VITE_API_BASE_URL:-http://localhost:5080}"
 
 cleanup() {
