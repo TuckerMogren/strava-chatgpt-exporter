@@ -73,8 +73,7 @@ p {
 }
 
 .toolbar,
-.filters,
-.downloads {
+.filters {
   align-items: end;
   display: flex;
   flex-wrap: wrap;
@@ -90,8 +89,7 @@ label {
 
 input,
 button,
-.primary,
-.downloads a {
+.primary {
   border: 1px solid #d0d7de;
   border-radius: 8px;
   font: inherit;
@@ -99,16 +97,14 @@ button,
 }
 
 button,
-.primary,
-.downloads a {
+.primary {
   background: #ffffff;
   cursor: pointer;
   text-decoration: none;
 }
 
 .primary,
-button:hover,
-.downloads a:hover {
+button:hover {
   background: #fc4c02;
   border-color: #fc4c02;
   color: #ffffff;
@@ -155,6 +151,37 @@ th {
   border: 1px solid #d8dee4;
   border-radius: 8px;
   padding: 16px;
+}
+
+.export-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.format-picker {
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  display: inline-flex;
+  overflow: hidden;
+}
+
+.format-picker button {
+  border: 0;
+  border-radius: 0;
+  border-right: 1px solid #d0d7de;
+}
+
+.format-picker button:last-child {
+  border-right: 0;
+}
+
+.format-picker button.selected {
+  background: #fff1ec;
+  color: #c2410c;
+  font-weight: 700;
 }
 
 .error {
