@@ -51,4 +51,6 @@ echo "Starting frontend on http://localhost:5173"
 ) &
 WEB_PID=$!
 
-wait -n "$API_PID" "$WEB_PID"
+while kill -0 "$API_PID" 2>/dev/null && kill -0 "$WEB_PID" 2>/dev/null; do
+  sleep 1
+done

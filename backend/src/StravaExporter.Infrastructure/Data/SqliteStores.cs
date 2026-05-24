@@ -1,4 +1,5 @@
 using System.Data;
+using System.Globalization;
 using System.Text.Json;
 using Dapper;
 using Microsoft.Data.Sqlite;
@@ -60,22 +61,24 @@ public sealed class SqliteStravaTokenStore(SqliteConnectionFactory factory) : IS
     public async Task<StravaTokenSet?> GetDefaultAsync(CancellationToken cancellationToken)
     {
         using var connection = factory.Create();
-        return await connection.QuerySingleOrDefaultAsync<StravaTokenSet>(new CommandDefinition("""
+        var row = await connection.QuerySingleOrDefaultAsync<StravaTokenRow>(new CommandDefinition("""
             SELECT AthleteId, AccessToken, RefreshToken, ExpiresAtUtc
             FROM StravaTokens
             ORDER BY UpdatedAtUtc DESC
             LIMIT 1
             """, cancellationToken: cancellationToken));
+        return row is null ? null : ToTokenSet(row);
     }
 
     public async Task<StravaTokenSet?> GetByAthleteIdAsync(long athleteId, CancellationToken cancellationToken)
     {
         using var connection = factory.Create();
-        return await connection.QuerySingleOrDefaultAsync<StravaTokenSet>(new CommandDefinition("""
+        var row = await connection.QuerySingleOrDefaultAsync<StravaTokenRow>(new CommandDefinition("""
             SELECT AthleteId, AccessToken, RefreshToken, ExpiresAtUtc
             FROM StravaTokens
             WHERE AthleteId = @athleteId
             """, new { athleteId }, cancellationToken: cancellationToken));
+        return row is null ? null : ToTokenSet(row);
     }
 
     public async Task SaveAsync(StravaTokenSet tokenSet, CancellationToken cancellationToken)
@@ -108,6 +111,17 @@ public sealed class SqliteStravaTokenStore(SqliteConnectionFactory factory) : IS
             new { athleteId },
             cancellationToken: cancellationToken));
     }
+
+    private static StravaTokenSet ToTokenSet(StravaTokenRow row) =>
+        new()
+        {
+            AthleteId = row.AthleteId,
+            AccessToken = row.AccessToken,
+            RefreshToken = row.RefreshToken,
+            ExpiresAtUtc = DateTimeOffset.Parse(row.ExpiresAtUtc, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal)
+        };
+
+    private sealed record StravaTokenRow(long AthleteId, string AccessToken, string RefreshToken, string ExpiresAtUtc);
 }
 
 public sealed class SqliteExportJobStore(SqliteConnectionFactory factory) : IExportJobStore
